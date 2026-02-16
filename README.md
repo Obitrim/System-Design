@@ -1,254 +1,363 @@
-# System Design
+# 1️⃣ What is System Design (Really)?
 
-This project documents my journey in learning System Design concepts and building robust, reliable, maintainable, and scalable applications.
-
----
-
-## Curriculum Overview
-
-By following this curriculum, you'll be prepared to step into senior engineering roles with strong focus on production-ready systems—beyond just theory.
-
-**Legend:**
-
-- 🎯 **Concept Focus**
-- 🧠 **What You Must Understand**
-- 🛠 **What You Must Implement**
-- 💻 **Sample Project Stack:** _Node.js, PostgreSQL, Redis, Docker, Kafka, AWS-style architecture_
+System design is the discipline of **designing software systems that continue to work correctly as load, users, data, and failures increase**.
 
 ---
 
-## 📆 12-Week System Design Curriculum (5 Days/Week)
+### ❌ It is NOT:
+- Choosing frameworks
+- Writing business logic
+- UI design
 
-### **Stack Used Throughout**
-
-- **Backend:** Node.js (Express or NestJS)
-- **Database:** PostgreSQL
-- **Cache:** Redis
-- **Queue:** Kafka _(or RabbitMQ)_
-- **Infrastructure:** Docker
-- **Monitoring:** Prometheus + Grafana
-- **Cloud Concepts:** AWS-style (EC2, S3, ALB, etc.)
-
----
-
-## 🔥 PHASE 1 — Core Foundations (Weeks 1–4)
-
-<details>
-<summary><strong>WEEK 1 – Scalability & Architecture Basics</strong></summary>
-
-| Day   | Concept                        | You Must Know                          | Practical Task                                     | Sample Project          |
-| ----- | ------------------------------ | -------------------------------------- | -------------------------------------------------- | ----------------------- |
-| Day 1 | What is System Design?         | Throughput, latency, availability, QPS | Install Docker, set up Node + Postgres             | Start "Mini Social API" |
-| Day 2 | Vertical vs Horizontal Scaling | Stateless services                     | Convert API to stateless                           | JWT auth                |
-| Day 3 | Load Estimation                | Capacity planning                      | Estimate users, traffic, storage                   |                         |
-| Day 4 | Monolith Architecture          | Pros/Cons                              | Build monolithic REST API                          |                         |
-| Day 5 | Reverse Proxy & Load Balancer  | L4 vs L7                               | Add Nginx in front of app, run multiple containers |                         |
-
-</details>
-
-<details>
-<summary><strong>WEEK 2 – Databases Deep Dive</strong></summary>
-
-| Day   | Concept            | You Must Know           | Practical Task                   |
-| ----- | ------------------ | ----------------------- | -------------------------------- |
-| Day 1 | SQL Indexing       | B-tree, composite index | Add indexes & benchmark queries  |
-| Day 2 | Transactions       | ACID, isolation levels  | Simulate race conditions         |
-| Day 3 | Query Optimization | EXPLAIN, slow queries   | Optimize feed query              |
-| Day 4 | Replication        | Read replicas           | Simulate read scaling            |
-| Day 5 | NoSQL              | CAP theorem basics      | Compare Mongo vs Postgres design |
-
-**✅ Project Feature:** Add Posts, Likes, Comments with optimized queries
-
-</details>
-
-<details>
-<summary><strong>WEEK 3 – Caching & Performance</strong></summary>
-
-| Day   | Concept            | You Must Know             | Practical Task                  |
-| ----- | ------------------ | ------------------------- | ------------------------------- |
-| Day 1 | Caching Strategies | Cache aside/write-through | Add Redis caching to feed       |
-| Day 2 | Cache Invalidation | TTL/manual invalidation   | Implement invalidation logic    |
-| Day 3 | CDN                | Static asset caching      | Serve images via CDN simulation |
-| Day 4 | Rate Limiting      | Token bucket              | Implement API rate limiting     |
-| Day 5 | Benchmarking       | Load testing basics       | Use k6 or Artillery             |
-
-**✅ Project now handles 10k+ simulated users**
-
-</details>
-
-<details>
-<summary><strong>WEEK 4 – API Design & Security</strong></summary>
-
-| Day   | Concept             | You Must Know           | Practical Task                    |
-| ----- | ------------------- | ----------------------- | --------------------------------- |
-| Day 1 | REST Best Practices | Idempotency, pagination | Convert feed to cursor pagination |
-| Day 2 | Auth                | JWT vs sessions         | Implement access & refresh tokens |
-| Day 3 | OAuth               | OAuth2 flow             | Add Google login                  |
-| Day 4 | RBAC                | Role-based access       | Add admin role                    |
-| Day 5 | API Gateway         | Gateway patterns        | Create simple gateway service     |
-
-</details>
+### ✅ It IS:
+- How components interact
+- How data flows
+- How systems fail
+- How systems recover
+- How systems scale
 
 ---
 
-## 🚀 PHASE 2 — Distributed Systems (Weeks 5–8)
+#### **Mental Model**
+Think in terms of:
 
-<details>
-<summary><strong>WEEK 5 – Messaging & Event Driven Systems</strong></summary>
-
-| Day   | Concept                   | You Must Know         | Practical Task               |
-| ----- | ------------------------- | --------------------- | ---------------------------- |
-| Day 1 | Message Queues            | Async processing      | Install Kafka                |
-| Day 2 | Producers/Consumers       | Delivery guarantees   | Publish post-created event   |
-| Day 3 | Event-Driven Architecture | Decoupling services   | Create notification service  |
-| Day 4 | Dead Letter Queues        | Failure handling      | Add retry logic              |
-| Day 5 | Idempotency               | Exactly-once illusion | Prevent duplicate processing |
-
-**✅ Split system into:**
-
-- API service
-- Notification service
-- Analytics service
-
-</details>
-
-<details>
-<summary><strong>WEEK 6 – Consistency & Distributed Data</strong></summary>
-
-| Day   | Concept              | You Must Know               | Practical Task              |
-| ----- | -------------------- | --------------------------- | --------------------------- |
-| Day 1 | CAP Theorem          | Trade-offs                  | Simulate service outage     |
-| Day 2 | Eventual Consistency | Read models                 | Build async read model      |
-| Day 3 | CQRS                 | Command vs Query separation | Separate write/read DB      |
-| Day 4 | Saga Pattern         | Distributed transactions    | Implement payment workflow  |
-| Day 5 | Two Phase Commit     | Why to avoid                | Simulate failed transaction |
-
-</details>
-
-<details>
-<summary><strong>WEEK 7 – Microservices Architecture</strong></summary>
-
-| Day   | Concept                  | You Must Know        | Practical Task                |
-| ----- | ------------------------ | -------------------- | ----------------------------- |
-| Day 1 | Monolith → Microservices | Tradeoffs            | Break project into 3 services |
-| Day 2 | Service Communication    | REST vs async        | Replace REST with events      |
-| Day 3 | Service Discovery        | Basic understanding  | Simulate registry             |
-| Day 4 | Circuit Breaker          | Fault isolation      | Add circuit breaker logic     |
-| Day 5 | API Aggregation          | Backend for frontend | Build BFF layer               |
-
-</details>
-
-<details>
-<summary><strong>WEEK 8 – Sharding & Scaling Databases</strong></summary>
-
-| Day   | Concept            | You Must Know     | Practical Task               |
-| ----- | ------------------ | ----------------- | ---------------------------- |
-| Day 1 | Database Sharding  | Range vs hash     | Simulate sharded DB          |
-| Day 2 | Consistent Hashing | Load distribution | Implement hash logic         |
-| Day 3 | Rebalancing        | Data migration    | Move shard data              |
-| Day 4 | Distributed Locks  | Redis locks       | Implement locking system     |
-| Day 5 | Leader Election    | Raft basics       | Simulate simple leader logic |
-
-</details>
+```
+Clients → APIs → Services → Databases → Caches → Queues
+```
 
 ---
 
-## 🛡 PHASE 3 — Production Readiness (Weeks 9–10)
-
-<details>
-<summary><strong>WEEK 9 – Reliability & Observability</strong></summary>
-
-| Day   | Concept         | You Must Know       | Practical Task       |
-| ----- | --------------- | ------------------- | -------------------- |
-| Day 1 | Fault Tolerance | Redundancy          | Run multi-node setup |
-| Day 2 | Monitoring      | Metrics, logs       | Add Prometheus       |
-| Day 3 | Tracing         | Distributed tracing | Add OpenTelemetry    |
-| Day 4 | SLA/SLO         | Reliability math    | Define SLAs          |
-| Day 5 | Chaos Testing   | Failure simulation  | Kill containers      |
-
-</details>
-
-<details>
-<summary><strong>WEEK 10 – Cloud & Infrastructure</strong></summary>
-
-| Day   | Concept             | You Must Know        | Practical Task             |
-| ----- | ------------------- | -------------------- | -------------------------- |
-| Day 1 | Docker Deep Dive    | Container networking | Optimize Dockerfiles       |
-| Day 2 | CI/CD Pipelines     |                      | Setup GitHub Actions       |
-| Day 3 | Cloud Architecture  | AWS-style infra      | Design AWS diagram         |
-| Day 4 | Object Storage      | S3 design            | Implement file upload      |
-| Day 5 | Deployment Strategy | Blue/Green           | Simulate deployment switch |
-
-</details>
+#### **System Design Answers:**
+- What happens when traffic spikes?
+- What breaks first?
+- How do we scale safely?
+- How do we measure performance?
 
 ---
 
-## 🧠 PHASE 4 — Interview & Advanced Design (Weeks 11–12)
+# 2️⃣ Core Metrics You MUST Know (Non-Negotiable)
 
-<details>
-<summary><strong>WEEK 11 – Design Famous Systems</strong></summary>
+These metrics are the language of system design.
 
-Design a full system from scratch each day:
+## 2.1 **Throughput**
 
-| Day   | System           |
-| ----- | ---------------- |
-| Day 1 | URL Shortener    |
-| Day 2 | Chat System      |
-| Day 3 | Twitter Feed     |
-| Day 4 | Payment System   |
-| Day 5 | Ride-Hailing App |
+**Definition:**  
+Throughput = how much work your system completes per unit time.
 
-</details>
+**Examples:**
+- Requests per second
+- Messages per minute
+- Files uploaded per hour
 
-<details>
-<summary><strong>WEEK 12 – Senior Level Topics</strong></summary>
+**Example:**  
+If your API handles 500 requests per second:  
+➡️ **Your throughput = 500 RPS**
 
-| Day   | Concept                           |
-| ----- | --------------------------------- |
-| Day 1 | Distributed Consensus             |
-| Day 2 | Global Systems (multi-region)     |
-| Day 3 | Data Privacy & Compliance         |
-| Day 4 | Cost Optimization                 |
-| Day 5 | Full Capstone Architecture Review |
-
-</details>
+**Key Insight:**  
+- Throughput answers: _“How much can we process?”_  
+- But **NOT**: _“How fast does one request complete?”_ (that’s *latency*)
 
 ---
 
-## 🏗 Final Capstone Project
+## 2.2 **Latency**
 
-**Build:** _Scalable SaaS Platform_
+**Definition:**  
+Latency = time taken for a single request to complete.
 
-**Features:**
+**Measured in:**
+- milliseconds (ms)
+- seconds
 
-- Auth
-- RBAC
-- Microservices
-- Redis caching
-- Kafka events
-- Sharded DB
-- File uploads
-- Monitoring
-- CI/CD
-- Docker deployment
+**Example:**  
+User sends request → Response arrives in 120ms  
+➡️ **Latency = 120ms**
+
+**Why latency matters more than you think:**  
+Users feel:
+- <100ms → instant
+- 100–300ms → fast
+- 300–1000ms → slow
+- 1s → broken
+
+**Key Insight:**  
+You can have:
+- High throughput
+- Terrible latency
+
+_Example: A batch system processing millions of jobs slowly._
 
 ---
 
-## 📚 Core Books You Must Read
+## 2.3 **QPS (Queries Per Second)**
 
-- _Designing Data-Intensive Applications_
-- _System Design Interview – An Insider's Guide_
-- _Clean Architecture_
+**Definition:**  
+QPS = number of requests hitting your system per second.
+
+**Relationship:**  
+QPS ≈ Throughput (for APIs)
+
+But:
+- QPS focuses on **incoming load**
+- Throughput focuses on **successful processing**
+
+**Example:**
+- Incoming QPS: 1,000
+- Processed: 800
+- Failed: 200
+
+_Your system is overloaded._
 
 ---
 
-## ⚡ Career Growth Alignment
+## 2.4 **Availability**
 
-By completing this curriculum, you will:
+**Definition:**  
+Availability = percentage of time your system is usable.
 
-- Move toward senior engineer level
-- Strengthen your backend skills
-- Gain a deep understanding of architecture
+**Measured as:**  
+`Availability = Uptime / Total Time`
 
-**Outcome:**  
-You’ll reach Senior Backend level, be ready for FAANG-style system design interviews, and be capable of designing real SaaS architectures.
+**Common SLOs:**
+| Availability | Downtime / Year   |
+| ------------ | ---------------- |
+| 99%          | ~3.6 days        |
+| 99.9%        | ~8.7 hours       |
+| 99.99%       | ~52 minutes      |
+
+**Key Insight:**  
+High availability requires:
+- Redundancy
+- Health checks
+- Failover
+- No single point of failure
+
+---
+
+# 3️⃣ How These Metrics Interact (CRITICAL)
+
+You **cannot maximize everything at once**.
+
+**Tradeoffs**
+- Increasing throughput → may increase latency
+- Reducing latency → may reduce throughput
+- Increasing availability → increases cost & complexity
+
+_System design is controlled compromise._
+
+---
+
+# 4️⃣ PRACTICAL FOUNDATION: MINI SOCIAL API
+
+You will build something that grows across the curriculum.
+
+### What are we building?
+A Mini Social API with:
+- Users
+- Posts
+- Likes (later)
+- Comments (later)
+
+*Today: foundation only*
+
+---
+
+## 4.1 **Architecture (Day 1 version)**
+
+```
+Client
+  ↓
+Node.js API
+  ↓
+PostgreSQL
+```
+- Single service.
+- Single database.
+- Simple on purpose.
+
+---
+
+## 4.2 **Why Docker from Day 1?**
+
+Because real systems are **reproducible**.
+
+Docker gives you:
+- Same environment everywhere
+- Isolation
+- Predictability
+
+---
+
+# 5️⃣ IMPLEMENTATION (STEP-BY-STEP)
+
+## 5.1 **Project Structure**
+```
+mini-social/
+├── docker-compose.yml
+├── api/
+│   ├── Dockerfile
+│   ├── package.json
+│   └── index.js
+```
+
+---
+
+## 5.2 **docker-compose.yml**
+```yaml
+version: "3.8"
+
+services:
+  api:
+    build: ./api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/social
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: social
+    ports:
+      - "5432:5432"
+```
+
+---
+
+## 5.3 **API Dockerfile**
+```dockerfile
+FROM node:18
+
+WORKDIR /app
+
+COPY package.json .
+RUN npm install
+
+COPY . .
+
+CMD ["node", "index.js"]
+```
+
+---
+
+## 5.4 **package.json**
+```json
+{
+  "name": "mini-social-api",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.19.0",
+    "pg": "^8.11.3"
+  }
+}
+```
+
+---
+
+## 5.5 **index.js (Minimal API)**
+```js
+const express = require("express");
+const { Pool } = require("pg");
+
+const app = express();
+app.use(express.json());
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
+app.get("/health", async (_, res) => {
+  res.json({ status: "ok" });
+});
+
+app.post("/users", async (req, res) => {
+  const { email } = req.body;
+  const result = await pool.query(
+    "INSERT INTO users(email) VALUES($1) RETURNING *",
+    [email]
+  );
+  res.json(result.rows[0]);
+});
+
+app.get("/users", async (_, res) => {
+  const result = await pool.query("SELECT * FROM users");
+  res.json(result.rows);
+});
+
+app.listen(3000, () => {
+  console.log("API running on port 3000");
+});
+```
+
+---
+
+# 6️⃣ Database Schema (Day 1 Minimal)
+```sql
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT now()
+);
+```
+
+---
+
+# 7️⃣ Connect Concepts to Reality (IMPORTANT)
+
+**Throughput:**  
+Each request hits Node + DB  
+_DB will be the bottleneck first_
+
+**Latency:**  
+Query time + network + serialization
+
+**QPS:**  
+Try load testing:  
+100 users → 100 QPS
+
+**Availability:**  
+If DB crashes → system down  
+_Single point of failure (intentional for Day 1)_
+
+---
+
+# 8️⃣ Day 1 Thinking Exercises (DO THESE)
+
+**What happens if:**
+- 1,000 users sign up at once?
+- What breaks first?
+  - Node?
+  - Postgres?
+
+**How would latency change if:**
+- DB is on another machine?
+
+**How would you improve availability?**
+
+_(These will be answered in Days 2–5.)_
+
+---
+
+# 9️⃣ What You Should Understand by End of Day 1
+
+You should now be able to:
+- Explain system design in one sentence
+- Define throughput, latency, QPS, availability
+- Identify bottlenecks in a simple architecture
+- Run a real backend system locally using Docker
+- Understand why this design will not scale
+
+That last point is **intentional**.
+
+---
+
+## 🔜 What Day 2 Will Fix
+
+Day 2 introduces:
+- Stateless services
+- Horizontal scaling
+- JWT auth
+- Removing single-instance limitations
